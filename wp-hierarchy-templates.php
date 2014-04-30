@@ -24,11 +24,26 @@ function WTFHierarchyTemplates_activate()
 
 class WTFHierarchyTemplates
 {
-
-
 	public function __construct()
 	{
 		add_filter( 'template_include', array($this,'routing'), 99 );
+
+		// mustache plagina errors
+
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+		if(!is_plugin_active('wp-mustache/wp-mustache.php'))
+		{
+			function my_admin_notice()
+			{
+		    	?>
+		    	<div class="error">
+		        	<p><?php echo 'Nepieciešams mustache plugins!'; ?></p>
+		    	</div>
+		    	<?php
+			}
+			add_action( 'admin_notices', 'my_admin_notice' );
+		}
 	}
 	
 	public function routing($file)
@@ -53,6 +68,7 @@ class WTFHierarchyTemplates
 		else :
 			$template = get_index_template();
 		endif;
+		return $template;
 	}
 
 	/**
