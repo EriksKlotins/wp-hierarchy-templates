@@ -53,7 +53,7 @@ $data = array(
 	'include_once(ABSPATH."wp-admin/includes/plugin.php");',
 	'if(!is_plugin_active("wp-mustache/wp-mustache.php"))',
 	'{',
-	'include dirname(__FILE__)."/../../plugins/wp-mustache/wp-mustache.php";',
+	'include plugin_dir_path( __FILE__ ) ."/wp-mustache/wp-mustache.php";',
 	'}',
 	'',
 	'class '.$className.' extends WTFHierarchyTemplates',
